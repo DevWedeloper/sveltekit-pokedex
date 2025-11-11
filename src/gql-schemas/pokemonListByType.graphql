@@ -1,0 +1,16 @@
+query pokemonListByType($typeName: String!, $limit: Int!, $offset: Int!) {
+  pokemontype(limit: $limit, offset: $offset, where: { type: { name: { _eq: $typeName } } }) {
+    pokemon {
+      id
+      name
+      pokemontypes {
+        type {
+          name
+        }
+      }
+      pokemonsprites {
+        sprites(path: "other.official-artwork.front_default")
+      }
+    }
+  }
+}

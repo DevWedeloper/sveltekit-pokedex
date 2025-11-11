@@ -1,0 +1,8 @@
+query filterList {
+  type {
+    name
+  }
+  region {
+    name
+  }
+}

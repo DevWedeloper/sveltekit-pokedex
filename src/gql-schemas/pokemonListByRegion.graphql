@@ -1,0 +1,18 @@
+query pokemonListByRegion($regionName: String!, $limit: Int!, $offset: Int!) {
+  generation(where: { region: { name: { _eq: $regionName } } }) {
+    pokemonspecies(limit: $limit, offset: $offset, order_by: { id: asc }) {
+      pokemons {
+        id
+        name
+        pokemontypes {
+          type {
+            name
+          }
+        }
+        pokemonsprites {
+          sprites(path: "other.official-artwork.front_default")
+        }
+      }
+    }
+  }
+}

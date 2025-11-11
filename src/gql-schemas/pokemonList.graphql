@@ -1,0 +1,14 @@
+query pokemonList($limit: Int!, $offset: Int!) {
+  pokemon(limit: $limit, offset: $offset) {
+    id
+    name
+    pokemontypes {
+      type {
+        name
+      }
+    }
+    pokemonsprites {
+      sprites(path: "other.official-artwork.front_default")
+    }
+  }
+}

@@ -1,0 +1,32 @@
+query pokemonDetailsById($id: Int!) {
+  pokemon(where: { id: { _eq: $id } }) {
+    id
+    name
+    height
+    weight
+    pokemontypes {
+      type {
+        name
+      }
+    }
+    pokemonabilities {
+      ability {
+        name
+      }
+    }
+    pokemonsprites {
+      sprites
+    }
+    pokemonspecy {
+      pokemonspeciesflavortexts(limit: 1, where: { pokemon_species_id: { _eq: $id } }) {
+        flavor_text
+      }
+    }
+    pokemonstats {
+      base_stat
+      stat {
+        name
+      }
+    }
+  }
+}
