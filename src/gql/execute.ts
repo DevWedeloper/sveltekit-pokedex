@@ -1,5 +1,6 @@
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 import { print } from 'graphql'
+import { fetchWithCache } from '@/lib/utils/fetchWithCache'
 
 interface ExecuteOptions {
   fetch?: typeof window.fetch
@@ -25,7 +26,9 @@ export async function execute<TResult, TVariables>(
   const variables = maybeOptions ? (variablesOrOptions as TVariables) : undefined
   const options = maybeOptions || (variablesOrOptions as ExecuteOptions | undefined)
 
-  const fetchFn = options?.fetch ?? window.fetch
+  const fetchFn = options?.fetch ?? fetchWithCache
+
+  console.log(options?.fetch ? 'fetch' : 'fetchWithCache')
 
   const response = await fetchFn('https://graphql.pokeapi.co/v1beta2', {
     method: 'POST',
