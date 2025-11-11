@@ -28,8 +28,6 @@ export async function execute<TResult, TVariables>(
 
   const fetchFn = options?.fetch ?? fetchWithCache
 
-  console.log(options?.fetch ? 'fetch' : 'fetchWithCache')
-
   const response = await fetchFn('https://graphql.pokeapi.co/v1beta2', {
     method: 'POST',
     headers: {
