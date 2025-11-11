@@ -2,9 +2,10 @@
   import { page } from '$app/state'
   import favicon from '$lib/assets/favicon.svg'
   import Navbar from '$lib/components/Navbar.svelte'
+  import { QueryClientProvider } from '@tanstack/svelte-query'
   import '../app.css'
 
-  const { children } = $props()
+  const { children, data } = $props()
 </script>
 
 <svelte:head>
@@ -16,9 +17,10 @@
   <meta name='title' content='Pokédex' />
   <meta name='description' content='A modern Pokédex built with SvelteKit.' />
   <meta name='author' content='DevWedeloper ' />
-
 </svelte:head>
 
 <Navbar />
 
-{@render children()}
+<QueryClientProvider client={data.queryClient}>
+  {@render children?.()}
+</QueryClientProvider>
