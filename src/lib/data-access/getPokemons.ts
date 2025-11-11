@@ -24,7 +24,7 @@ export async function fetchPokemons({
   filter = { filterType: null, filterValue: null },
   offset = 0,
   limit = 15,
-  fetch = window.fetch,
+  fetch,
   signal,
 }: FetchPokemonsArgs): Promise<Pokemon[]> {
   const { filterType = null, filterValue = null } = filter || {}
