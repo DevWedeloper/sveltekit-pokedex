@@ -2,6 +2,7 @@ import type { Pokemon } from '$lib/types/pokemon'
 import { createInfiniteQuery } from '@tanstack/svelte-query'
 import { execute } from '@/gql/execute'
 import { PokemonListByRegionDocument, PokemonListByTypeDocument, PokemonListDocument } from '@/gql/graphql'
+import { LIMIT } from '../constants/paginations'
 
 interface FetchPokemonsArgs {
   filter: { filterType: string | null, filterValue: string | null }
@@ -11,7 +12,7 @@ interface FetchPokemonsArgs {
   signal?: AbortSignal
 }
 
-export function POKEMONS_QUERY_KEY(filter: { filterType: string | null, filterValue: string | null }, limit = 15) {
+export function POKEMONS_QUERY_KEY(filter: { filterType: string | null, filterValue: string | null }, limit = LIMIT) {
   const { filterType = null, filterValue = null } = filter || {}
   return [
     'pokemons',
@@ -23,7 +24,7 @@ export function POKEMONS_QUERY_KEY(filter: { filterType: string | null, filterVa
 export async function fetchPokemons({
   filter = { filterType: null, filterValue: null },
   offset = 0,
-  limit = 15,
+  limit = LIMIT,
   fetch,
   signal,
 }: FetchPokemonsArgs): Promise<Pokemon[]> {
@@ -60,7 +61,7 @@ export async function fetchPokemons({
   return res
 }
 
-export function getPokemonsQuery(filter: { filterType: string | null, filterValue: string | null }, limit = 15) {
+export function getPokemonsQuery(filter: { filterType: string | null, filterValue: string | null }, limit = LIMIT) {
   return createInfiniteQuery(() => ({
     queryKey: POKEMONS_QUERY_KEY(filter, limit),
     queryFn: ({ pageParam, signal }) => fetchPokemons({ filter, offset: pageParam, limit, signal }),
