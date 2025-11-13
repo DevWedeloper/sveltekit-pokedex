@@ -3,7 +3,7 @@
 A personal implementation of a Pokédex built with **SvelteKit**.
 This project serves as my own take on creating a simple, modern Pokédex interface using the [PokéAPI](https://pokeapi.co/).
 
-🌐 **Live Demo:** [sveltekit-pokedex.vercel.app](https://sveltekit-pokedex.vercel.app)
+🌐 **Live Demo:** [sveltekit-pokedex-devwedeloper.vercel.app](https://sveltekit-pokedex.vercel.app)
 
 ## 🧩 Stack
 
