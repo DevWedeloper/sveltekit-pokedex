@@ -1,6 +1,6 @@
 <script lang='ts'>
   import { page } from '$app/state'
-  import favicon from '$lib/assets/favicon.svg'
+  import favicon from '$lib/assets/pokeball.svg'
   import Navbar from '$lib/components/Navbar.svelte'
   import { QueryClientProvider } from '@tanstack/svelte-query'
   import '../app.css'
