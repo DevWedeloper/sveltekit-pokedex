@@ -6,10 +6,11 @@
     <p class='text-muted-foreground mb-8 text-lg md:text-xl'>
       Explore the world of Pokémon — detailed data, stats, and types all in one place.
     </p>
-    <button
+    <a
       class='bg-primary text-primary-foreground rounded-lg px-6 py-3 shadow transition hover:opacity-90'
+      href='/pokemon'
     >
       Enter Pokédex
-    </button>
+    </a>
   </div>
 </main>
