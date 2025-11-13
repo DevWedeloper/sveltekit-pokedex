@@ -1,4 +1,4 @@
-<main class='bg-background text-foreground flex min-h-screen flex-col items-center justify-center px-6 text-center font-sans'>
+<main class='bg-background text-foreground flex min-h-[calc(100vh-60px)] flex-col items-center justify-center px-6 text-center font-sans'>
   <div class='max-w-xl'>
     <h1 class='text-primary mb-4 text-5xl font-bold drop-shadow-sm md:text-6xl'>
       Welcome to Pokédex
