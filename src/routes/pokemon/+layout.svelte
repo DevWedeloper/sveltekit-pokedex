@@ -17,6 +17,7 @@
   const filters = $derived(getFilters.data)
 
   const getPokemons = $derived(getPokemonsQuery(filter))
+  const getPokemonsLoading = $derived(getPokemons.isLoading)
   const pokemonList = $derived(getPokemons.data ? getPokemons.data.pages.flatMap(page => page) : [])
 
   function updateFilter(filterType: string, filterValue: string) {
@@ -72,16 +73,20 @@
         <Filters {filters} {updateFilter} {resetFilters} />
       {/if}
 
-      {#if pokemonList.length > 0}
-        <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-          {#each pokemonList as pokemon}
-            <PokemonListCard {pokemon} />
-          {/each}
-        </div>
+      {#if !getPokemonsLoading}
+        {#if pokemonList.length > 0}
+          <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+            {#each pokemonList as pokemon}
+              <PokemonListCard {pokemon} />
+            {/each}
+          </div>
+          <div bind:this={sentinel}></div>
+        {:else}
+          <p class='text-muted-foreground text-center'>No Pokemons found</p>
+        {/if}
       {:else}
-        <p class='text-muted-foreground text-center'>No Pokemons found</p>
+        <p class='text-muted-foreground text-center'>Loading Pokemons...</p>
       {/if}
-      <div bind:this={sentinel}></div>
     </ScrollArea>
   </aside>
 
