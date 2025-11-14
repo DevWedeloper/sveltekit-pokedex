@@ -20,8 +20,6 @@
       goto('/pokemon')
     }
   })
-
-  $inspect(pokemonDetailsLoading)
 </script>
 
 <svelte:window bind:innerWidth />
