@@ -72,15 +72,15 @@
         <Filters {filters} {updateFilter} {resetFilters} />
       {/if}
 
-      <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-        {#if pokemonList}
+      {#if pokemonList.length > 0}
+        <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
           {#each pokemonList as pokemon}
             <PokemonListCard {pokemon} />
           {/each}
-        {:else}
-          <p>Loading…</p>
-        {/if}
-      </div>
+        </div>
+      {:else}
+        <p class='text-muted-foreground text-center'>No Pokemons found</p>
+      {/if}
       <div bind:this={sentinel}></div>
     </ScrollArea>
   </aside>
