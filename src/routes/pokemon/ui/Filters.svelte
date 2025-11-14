@@ -23,7 +23,7 @@
   <ScrollArea orientation='horizontal' class='w-full'>
     <div class='flex gap-2 pb-2'>
       {#each filters.type as type}
-        <Button variant='ghost' onclick={() => updateFilter('type', type.name)}>
+        <Button variant='outline' onclick={() => updateFilter('type', type.name)}>
           {capitalize(type.name)}
         </Button>
       {/each}
@@ -34,7 +34,7 @@
   <ScrollArea orientation='horizontal' class='w-full'>
     <div class='flex gap-2 pb-2'>
       {#each filters.region as region}
-        <Button variant='ghost' onclick={() => updateFilter('region', region.name)}>
+        <Button variant='outline' onclick={() => updateFilter('region', region.name)}>
           {capitalize(region.name)}
         </Button>
       {/each}
