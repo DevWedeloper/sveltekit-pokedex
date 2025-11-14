@@ -29,6 +29,8 @@
   {#if !pokemonDetailsLoading}
     {#if pokemonData}
       <PokemonDetailsCard pokemon={pokemonData} />
+    {:else}
+      <p class='text-muted-foreground text-center'>Pokemon not found</p>
     {/if}
   {:else}
     <PokemonDetailsSkeleton />
@@ -41,6 +43,8 @@
       {#if !pokemonDetailsLoading}
         {#if pokemonData}
           <PokemonDetailsCard pokemon={pokemonData} />
+        {:else}
+          <p class='text-muted-foreground text-center'>Pokemon not found</p>
         {/if}
       {:else}
         <PokemonDetailsSkeleton />
