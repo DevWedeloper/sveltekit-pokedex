@@ -18,6 +18,8 @@
 
   const getPokemons = $derived(getPokemonsQuery(filter))
   const getPokemonsLoading = $derived(getPokemons.isLoading)
+  const isFetchingNextPage = $derived(getPokemons.isFetchingNextPage)
+  const hasNextPage = $derived(getPokemons.hasNextPage)
   const pokemonList = $derived(getPokemons.data ? getPokemons.data.pages.flatMap(page => page) : [])
 
   function updateFilter(filterType: string, filterValue: string) {
@@ -80,6 +82,14 @@
               <PokemonListCard {pokemon} />
             {/each}
           </div>
+
+          {#if isFetchingNextPage}
+            <p class='text-muted-foreground mt-4 text-center'>Loading more Pokemons...</p>
+          {/if}
+          {#if !hasNextPage}
+            <p class='text-muted-foreground mt-4 text-center'>You’ve reached the end!</p>
+          {/if}
+
           <div bind:this={sentinel}></div>
         {:else}
           <p class='text-muted-foreground text-center'>No Pokemons found</p>
