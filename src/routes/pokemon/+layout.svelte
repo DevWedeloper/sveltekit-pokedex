@@ -70,7 +70,7 @@
 
 <div class='bg-background text-foreground grid min-h-[calc(100vh-60px)] grid-cols-1 md:grid-cols-2'>
   <aside class='border-sidebar-border bg-sidebar text-sidebar-foreground border-r'>
-    <ScrollArea class='h-[calc(100vh-60px)] p-6' bind:viewportRef={scrollViewport}>
+    <ScrollArea class='h-[calc(100vh-60px)] p-6' bind:viewportRef={scrollViewport} data-testing-id='main-grid'>
       {#if filters}
         <Filters {filters} {updateFilter} {resetFilters} />
       {/if}
@@ -90,7 +90,7 @@
             <p class='text-muted-foreground mt-4 text-center'>You’ve reached the end!</p>
           {/if}
 
-          <div bind:this={sentinel}></div>
+          <div bind:this={sentinel} data-testing-id='sentinel'></div>
         {:else}
           <p class='text-muted-foreground text-center'>No Pokemons found</p>
         {/if}
