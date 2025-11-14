@@ -20,7 +20,7 @@
 {#if pokemon}
   <a
     href={pokemonUrl}
-    class='group text-card-foreground relative aspect-square overflow-hidden rounded-xl'
+    class='group text-card-foreground @container-[size] relative aspect-square overflow-hidden rounded-xl'
   >
     {#each pokemon.pokemontypes as type, index}
       <div
@@ -35,7 +35,7 @@
       <img
         src={pokemon.pokemonsprites[0].sprites}
         alt={pokemon.name}
-        class='h-20 w-20 transition-transform select-none group-hover:scale-110'
+        class='size-[80cqw] transition-transform select-none group-hover:scale-110 md:size-[60cqw]'
         loading='lazy'
       />
       <p class='text-sm font-medium capitalize'>{pokemon.name}</p>
