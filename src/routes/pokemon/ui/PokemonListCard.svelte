@@ -13,7 +13,7 @@
     '-bottom-[35%] -right-[35%]',
   ]
 
-  const currentQuery = page.url.search
+  const currentQuery = $derived(page.url.search)
   const pokemonUrl = $derived(pokemon ? `/pokemon/${pokemon.id}${currentQuery}` : '')
 </script>
 
