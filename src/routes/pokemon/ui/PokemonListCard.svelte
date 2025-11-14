@@ -7,10 +7,10 @@
   const { pokemon }: { pokemon: Pokemon } = $props()
 
   const circlePositions = [
-    '-top-10 -left-10',
-    '-top-10 -right-10',
-    '-bottom-10 -left-10',
-    '-bottom-10 -right-10',
+    '-top-[35%] -left-[35%]',
+    '-top-[35%] -right-[35%]',
+    '-bottom-[35%] -left-[35%]',
+    '-bottom-[35%] -right-[35%]',
   ]
 
   const currentQuery = page.url.search
@@ -24,12 +24,12 @@
   >
     {#each pokemon.pokemontypes as type, index}
       <div
-        class={cn('absolute z-0 size-24 rounded-full', circlePositions[index])}
+        class={cn('absolute z-0 size-[80cqw] rounded-full', circlePositions[index])}
         style={`background: ${typeColors[type.type?.name ?? '#A8A8A8']};`}
       ></div>
     {/each}
 
-    <div class='absolute inset-0 backdrop-blur-3xl'></div>
+    <div class='absolute inset-0 backdrop-blur-[50cqw]'></div>
 
     <div class='relative z-20 flex h-full flex-col items-center justify-center p-2 text-center'>
       <img
