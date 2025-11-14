@@ -2,6 +2,7 @@
   import type { PageData } from './$types'
   import { goto } from '$app/navigation'
   import * as Dialog from '$lib/components/ui/dialog/index.js'
+  import { ScrollArea } from '$lib/components/ui/scroll-area/index.js'
   import { getPokemonDetailsQuery } from '$lib/data-access/getPokemonDetails'
   import PokemonDetailsCard from './ui/PokemonDetailsCard.svelte'
   import PokemonDetailsSkeleton from './ui/PokemonDetailsSkeleton.svelte'
@@ -24,22 +25,26 @@
 
 <svelte:window bind:innerWidth />
 
-{#if !pokemonDetailsLoading}
-  {#if pokemonData}
-    <PokemonDetailsCard pokemon={pokemonData} />
+<ScrollArea class='h-[calc(100vh-6rem)] p-8 md:h-full'>
+  {#if !pokemonDetailsLoading}
+    {#if pokemonData}
+      <PokemonDetailsCard pokemon={pokemonData} />
+    {/if}
+  {:else}
+    <PokemonDetailsSkeleton />
   {/if}
-{:else}
-  <PokemonDetailsSkeleton />
-{/if}
+</ScrollArea>
 
 <Dialog.Root bind:open={isOpen}>
   <Dialog.Content>
-    {#if !pokemonDetailsLoading}
-      {#if pokemonData}
-        <PokemonDetailsCard pokemon={pokemonData} />
+    <ScrollArea class='h-[calc(100vh-6rem)] p-8 md:h-full'>
+      {#if !pokemonDetailsLoading}
+        {#if pokemonData}
+          <PokemonDetailsCard pokemon={pokemonData} />
+        {/if}
+      {:else}
+        <PokemonDetailsSkeleton />
       {/if}
-    {:else}
-      <PokemonDetailsSkeleton />
-    {/if}
+    </ScrollArea>
   </Dialog.Content>
 </Dialog.Root>
