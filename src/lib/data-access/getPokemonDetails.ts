@@ -14,7 +14,7 @@ export async function fetchPokemonDetails(
   { id, fetch, signal }: FetchPokemonDetailsArgs,
 ): Promise<PokemonDetails> {
   return execute(PokemonDetailsByIdDocument, { id }, { fetch, signal })
-    .then(result => result.pokemon?.[0] ?? null)
+    .then(result => result.pokemon[0] ?? null)
 }
 
 export function getPokemonDetailsQuery(id: number) {
