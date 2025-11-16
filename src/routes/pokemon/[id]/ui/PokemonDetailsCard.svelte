@@ -77,7 +77,7 @@
         <div class='flex justify-between gap-6'>
           {#each pokemon.pokemonabilities as { ability }}
             <span class='bg-card text-foreground w-full rounded-lg p-1 text-sm capitalize'>
-              {ability?.name}
+              {ability ? ability.name : 'N/A'}
             </span>
           {/each}
         </div>
