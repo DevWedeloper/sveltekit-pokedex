@@ -14,22 +14,21 @@ interface FetchPokemonsArgs {
 }
 
 export function POKEMONS_QUERY_KEY(filter: Filter, limit = LIMIT) {
-  const { filterType = null, filterValue = null, search = null } = filter || {}
   return [
     'pokemons',
-    { filterType, filterValue, search },
+    filter,
     limit,
   ]
 }
 
 export async function fetchPokemons({
-  filter = { filterType: null, filterValue: null, search: null },
+  filter,
   offset = 0,
   limit = LIMIT,
   fetch,
   signal,
 }: FetchPokemonsArgs): Promise<Pokemon[]> {
-  const { filterType = null, filterValue = null, search } = filter || {}
+  const { filterType, filterValue, search } = filter
 
   const res = await (async () => {
     if (search) {
