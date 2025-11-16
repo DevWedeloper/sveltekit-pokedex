@@ -53,7 +53,7 @@
         {#each pokemon.pokemontypes as { type }}
           <div
             class='rounded-md px-4 py-1 text-sm font-semibold'
-            style={`background-color: ${typeColors[type?.name ?? '#999']}`}
+            style={`background-color: ${type?.name ? typeColors[type.name] : '#999'}`}
           >
             {#if type?.name}
               {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
