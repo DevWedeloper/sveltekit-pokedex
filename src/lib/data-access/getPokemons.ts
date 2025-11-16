@@ -1,3 +1,4 @@
+import type { Filter } from '$lib/types/filter'
 import type { Pokemon } from '$lib/types/pokemon'
 import { PokemonListByKeywordDocument, PokemonListByRegionDocument, PokemonListByTypeDocument, PokemonListDocument } from '$lib/gql/graphql'
 import { execute } from '$lib/utils/execute'
@@ -5,14 +6,14 @@ import { createInfiniteQuery } from '@tanstack/svelte-query'
 import { LIMIT } from '../constants/paginations'
 
 interface FetchPokemonsArgs {
-  filter: { filterType: string | null, filterValue: string | null, search: string | null }
+  filter: Filter
   offset?: number
   limit?: number
   fetch?: typeof window.fetch
   signal?: AbortSignal
 }
 
-export function POKEMONS_QUERY_KEY(filter: { filterType: string | null, filterValue: string | null, search: string | null }, limit = LIMIT) {
+export function POKEMONS_QUERY_KEY(filter: Filter, limit = LIMIT) {
   const { filterType = null, filterValue = null, search = null } = filter || {}
   return [
     'pokemons',
@@ -69,7 +70,7 @@ export async function fetchPokemons({
   return res
 }
 
-export function getPokemonsQuery(filter: { filterType: string | null, filterValue: string | null, search: string | null }, limit = LIMIT) {
+export function getPokemonsQuery(filter: Filter, limit = LIMIT) {
   return createInfiniteQuery(() => ({
     queryKey: POKEMONS_QUERY_KEY(filter, limit),
     queryFn: ({ pageParam, signal }) => fetchPokemons({ filter, offset: pageParam, limit, signal }),
