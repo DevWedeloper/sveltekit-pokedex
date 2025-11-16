@@ -25,7 +25,7 @@
     {#each pokemon.pokemontypes as type, index}
       <div
         class={cn('absolute size-[80cqw] rounded-full blur-[50cqw]', circlePositions[index])}
-        style={`background: ${typeColors[type.type?.name ?? '#A8A8A8']};`}
+        style={`background: ${type?.type?.name ? typeColors[type.type.name] : '#A8A8A8'};`}
       ></div>
     {/each}
 
