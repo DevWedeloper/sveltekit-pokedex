@@ -41,12 +41,12 @@ export async function fetchPokemons({
     }
 
     if (filterType === 'type' && filterValue) {
-      const { pokemontype } = await execute(
+      const { pokemon } = await execute(
         PokemonListByTypeDocument,
         { typeName: filterValue, limit, offset },
         { fetch, signal },
       )
-      return pokemontype.map(({ pokemon }) => pokemon)
+      return pokemon
     }
 
     if (filterType === 'region' && filterValue) {
