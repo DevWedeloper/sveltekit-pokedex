@@ -6,6 +6,7 @@
   import { ScrollArea } from '$lib/components/ui/scroll-area/index.js'
   import { getFiltersQuery } from '$lib/data-access/getFilters'
   import { getPokemonsQuery } from '$lib/data-access/getPokemons'
+  import { useDebounce } from 'runed'
   import { onDestroy, onMount } from 'svelte'
   import Filters from './ui/Filters.svelte'
   import PokemonListCard from './ui/PokemonListCard.svelte'
@@ -22,17 +23,35 @@
   const hasNextPage = $derived(getPokemons.hasNextPage)
   const pokemonList = $derived(getPokemons.data ? getPokemons.data.pages.flatMap(page => page) : [])
 
+  let search = $derived(filter.search || '')
+
   function updateFilter(filterType: string, filterValue: string) {
-    const params = new URLSearchParams(page.url.searchParams.toString())
+    const params = new URLSearchParams()
     params.set('filterType', filterType)
     params.set('filterValue', filterValue)
 
     goto(`${page.url.pathname}?${params.toString()}`, { invalidateAll: true })
   }
 
+  function handleSearch() {
+    const params = new URLSearchParams()
+    if (search)
+      params.set('search', search)
+    else params.delete('search')
+
+    goto(`${page.url.pathname}?${params.toString()}`, { invalidateAll: true, keepFocus: true })
+  }
+
   function resetFilters() {
     goto(`${page.url.pathname}`, { invalidateAll: true })
   }
+
+  const oninput = useDebounce(
+    () => {
+      handleSearch()
+    },
+    () => 500,
+  )
 
   let sentinel: HTMLDivElement | null = $state(null)
   let observer: IntersectionObserver
@@ -72,7 +91,7 @@
   <aside class='border-sidebar-border bg-sidebar text-sidebar-foreground border-r'>
     <ScrollArea class='h-[calc(100vh-60px)] p-6' bind:viewportRef={scrollViewport} data-testing-id='main-grid'>
       {#if filters}
-        <Filters {filters} {updateFilter} {resetFilters} />
+        <Filters {filters} {updateFilter} {resetFilters} bind:search {oninput} />
       {/if}
 
       {#if !getPokemonsLoading}

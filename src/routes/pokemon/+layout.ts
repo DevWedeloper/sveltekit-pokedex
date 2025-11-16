@@ -6,8 +6,9 @@ import { LIMIT } from '@/lib/constants/paginations'
 export const load: LayoutLoad = async ({ parent, fetch, url }) => {
   const filterType = url.searchParams.get('filterType')
   const filterValue = url.searchParams.get('filterValue')
+  const search = url.searchParams.get('search')
 
-  const filter = { filterType, filterValue }
+  const filter = { filterType, filterValue, search }
 
   const limit = LIMIT
   const { queryClient } = await parent()
