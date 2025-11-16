@@ -16,6 +16,7 @@ This project serves as my own take on creating a simple, modern Pokédex interfa
 ## ✨ Features
 
 - **Pokémon List** – browse through all Pokémon with smooth infinite scrolling
+- **Search** – quickly find Pokémon by name or keyword
 - **Filter** – quickly narrow down the list by Pokémon type or region
 - **Detailed Pokémon Pages** – view stats, types, abilities, and more for each Pokémon
 
