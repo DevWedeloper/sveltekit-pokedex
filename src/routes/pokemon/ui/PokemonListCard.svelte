@@ -31,7 +31,7 @@
 
     <div class='relative z-20 flex h-full flex-col items-center justify-center p-2 text-center'>
       <img
-        src={pokemon.pokemonsprites[0].sprites}
+        src={pokemon.pokemonsprites[0]?.sprites || '/pokeball-silhouette.svg'}
         alt={pokemon.name}
         class='size-[80cqw] transition-transform select-none group-hover:scale-110 md:size-[60cqw]'
         loading='lazy'
