@@ -7,6 +7,19 @@
   const { pokemon }: { pokemon: PokemonDetails } = $props()
 </script>
 
+{#snippet statItem(label: string, value: number, color: string)}
+  <div class='flex flex-col items-center'>
+    <div
+      class='flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold'
+      style='background: {color}'
+      title={label}
+    >
+      {label}
+    </div>
+    <span class='text-foreground mt-1 text-sm font-semibold'>{value}</span>
+  </div>
+{/snippet}
+
 <div class='flex justify-center'>
   <div
     class='flex max-w-80 flex-col items-center gap-4 rounded-2xl text-center'
@@ -75,28 +88,19 @@
         </div>
       </div>
 
-      <div class='mt-4 flex flex-wrap justify-center gap-4'>
+      <div class='mt-4 flex gap-4'>
         {#each pokemon.pokemonstats as stat}
-          <div class='flex flex-col items-center'>
-            <div
-              class='flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold'
-              style="background: {statColors[stat.stat?.name ?? '#aaa']}"
-              title={stat.stat?.name}
-            >
-              {statLabels[stat.stat?.name ?? ''] || stat.stat?.name?.toUpperCase().slice(0, 3)}
-            </div>
-            <span class='text-foreground mt-1 text-sm font-semibold'>{stat.base_stat}</span>
-          </div>
+          {@render statItem(
+            statLabels[stat.stat?.name ?? ''] || stat.stat?.name?.toUpperCase().slice(0, 3) || '',
+            stat.base_stat,
+            statColors[stat.stat?.name ?? ''] ?? '#aaa',
+          )}
         {/each}
-
-        <div class='flex flex-col items-center'>
-          <div class='flex h-8 w-8 items-center justify-center rounded-full bg-blue-400 text-xs font-bold'>
-            TOT
-          </div>
-          <span class='text-foreground mt-1 text-sm font-semibold'>
-            {pokemon.pokemonstats.reduce((sum, s) => sum + s.base_stat, 0)}
-          </span>
-        </div>
+        {@render statItem(
+          'TOT',
+          pokemon.pokemonstats.reduce((sum, s) => sum + s.base_stat, 0),
+          '#60A5FA',
+        )}
       </div>
     </div>
   </div>
