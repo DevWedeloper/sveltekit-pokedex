@@ -63,3 +63,40 @@ test('loads more Pokémon on scroll in main grid', async ({ page }) => {
   const newCount = await cards.count()
   expect(newCount).toBeGreaterThan(initialCount)
 })
+
+test('search Pokémon by name', async ({ page }) => {
+  await page.goto('/pokemon')
+
+  // Wait for initial Pokémon cards to load
+  const cards = page.locator('a.group')
+  await cards.first().waitFor({ state: 'visible' })
+
+  const initialCount = await cards.count()
+
+  // Find the search input
+  const searchInput = page.locator('input[placeholder="Search..."]')
+  await searchInput.waitFor({ state: 'visible' })
+
+  // Type "bulb" into the search input
+  await searchInput.fill('bulb')
+
+  // Wait for new cards to appear or count to change
+  await page.waitForFunction(
+    oldCount => document.querySelectorAll('a.group').length !== oldCount,
+    initialCount,
+  )
+
+  // Wait for list to reload
+  await page.getByText('Loading Pokemons...').waitFor({ state: 'detached' })
+
+  // Verify all visible cards contain "bulb" in their name
+  const filteredCards = page.locator('a.group')
+  const count = await filteredCards.count()
+  expect(count).toBeGreaterThan(0)
+
+  for (let i = 0; i < count; i++) {
+    const name = await filteredCards.nth(i).locator('p.text-sm').textContent()
+    expect(name).not.toBeNull()
+    expect(name!.toLowerCase()).toContain('bulb')
+  }
+})
