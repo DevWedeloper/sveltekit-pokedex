@@ -1,10 +1,8 @@
-import type { PokemonDetailsByIdQuery } from '$lib/gql/graphql'
 import type { FetchOptions } from '$lib/types/fetch'
+import type { PokemonDetails } from '$lib/types/pokemon'
 import { PokemonDetailsByIdDocument } from '$lib/gql/graphql'
 import { execute } from '$lib/utils/execute'
 import { createQuery } from '@tanstack/svelte-query'
-
-type PokemonDetails = PokemonDetailsByIdQuery['pokemon'][0]
 
 export const POKEMON_DETAILS_QUERY_KEY = (id: number) => ['pokemon-details', id]
 
