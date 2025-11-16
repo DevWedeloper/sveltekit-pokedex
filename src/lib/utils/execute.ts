@@ -1,30 +1,26 @@
+import type { FetchOptions } from '$lib/types/fetch'
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 import { fetchWithCache } from '$lib/utils/fetchWithCache'
 import { print } from 'graphql'
 
-interface ExecuteOptions {
-  fetch?: typeof window.fetch
-  signal?: AbortSignal
-}
-
 export function execute<TResult>(
   query: DocumentNode<TResult, Record<string, never>>,
-  options?: ExecuteOptions,
+  options?: FetchOptions,
 ): Promise<TResult>
 
 export function execute<TResult, TVariables>(
   query: DocumentNode<TResult, TVariables>,
   variables: TVariables,
-  options?: ExecuteOptions,
+  options?: FetchOptions,
 ): Promise<TResult>
 
 export async function execute<TResult, TVariables>(
   query: DocumentNode<TResult, TVariables>,
-  variablesOrOptions?: TVariables | ExecuteOptions,
-  maybeOptions?: ExecuteOptions,
+  variablesOrOptions?: TVariables | FetchOptions,
+  maybeOptions?: FetchOptions,
 ): Promise<TResult> {
   const variables = maybeOptions ? (variablesOrOptions as TVariables) : undefined
-  const options = maybeOptions || (variablesOrOptions as ExecuteOptions | undefined)
+  const options = maybeOptions || (variablesOrOptions as FetchOptions | undefined)
 
   const fetchFn = options?.fetch ?? fetchWithCache
 

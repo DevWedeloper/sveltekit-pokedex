@@ -1,19 +1,15 @@
 import type { FilterListQuery } from '$lib/gql/graphql'
+import type { FetchOptions } from '$lib/types/fetch'
 import { FilterListDocument } from '$lib/gql/graphql'
 import { execute } from '$lib/utils/execute'
 import { createQuery } from '@tanstack/svelte-query'
-
-interface FetchFiltersArgs {
-  fetch?: typeof window.fetch
-  signal?: AbortSignal
-}
 
 export function FILTERS_QUERY_KEY() {
   return ['filters']
 }
 
 export async function fetchFilters(
-  { fetch = window.fetch, signal }: FetchFiltersArgs,
+  { fetch = window.fetch, signal }: FetchOptions,
 ): Promise<FilterListQuery> {
   return execute(FilterListDocument, { fetch, signal })
 }

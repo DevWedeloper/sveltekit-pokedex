@@ -1,3 +1,4 @@
+import type { FetchOptions } from '$lib/types/fetch'
 import type { Filter } from '$lib/types/filter'
 import type { Pokemon } from '$lib/types/pokemon'
 import { PokemonListByKeywordDocument, PokemonListByRegionDocument, PokemonListByTypeDocument, PokemonListDocument } from '$lib/gql/graphql'
@@ -5,13 +6,11 @@ import { execute } from '$lib/utils/execute'
 import { createInfiniteQuery } from '@tanstack/svelte-query'
 import { LIMIT } from '../constants/paginations'
 
-interface FetchPokemonsArgs {
+type FetchPokemonsArgs = {
   filter: Filter
   offset?: number
   limit?: number
-  fetch?: typeof window.fetch
-  signal?: AbortSignal
-}
+} & FetchOptions
 
 export function POKEMONS_QUERY_KEY(filter: Filter, limit = LIMIT) {
   return [
