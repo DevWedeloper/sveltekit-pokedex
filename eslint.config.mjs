@@ -14,4 +14,8 @@ export default antfu({
     'better-tailwindcss/enforce-consistent-line-wrapping': ['off'],
     'better-tailwindcss/no-unregistered-classes': ['off'],
   },
+}, {
+  ignores: [
+    'src/lib/gql',
+  ],
 })
