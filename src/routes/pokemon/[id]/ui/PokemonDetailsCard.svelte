@@ -91,9 +91,9 @@
       <div class='mt-4 flex gap-4'>
         {#each pokemon.pokemonstats as stat}
           {@render statItem(
-            statLabels[stat.stat?.name ?? ''] || stat.stat?.name?.toUpperCase().slice(0, 3) || '',
+            stat.stat?.name ? statLabels[stat.stat.name] : 'N/A',
             stat.base_stat,
-            statColors[stat.stat?.name ?? ''] ?? '#aaa',
+            stat.stat?.name ? statColors[stat.stat.name] : '#aaa',
           )}
         {/each}
         {@render statItem(
