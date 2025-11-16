@@ -25,30 +25,24 @@
 
 <svelte:window bind:innerWidth />
 
-<ScrollArea class='h-[calc(100vh-6rem)] p-8 md:h-full'>
-  {#if !pokemonDetailsLoading}
-    {#if pokemonData}
-      <PokemonDetailsCard pokemon={pokemonData} />
+{#snippet pokemonContent()}
+  <ScrollArea class='h-[calc(100vh-6rem)] p-8 md:h-full'>
+    {#if !pokemonDetailsLoading}
+      {#if pokemonData}
+        <PokemonDetailsCard pokemon={pokemonData} />
+      {:else}
+        <p class='text-muted-foreground text-center'>Pokemon not found</p>
+      {/if}
     {:else}
-      <p class='text-muted-foreground text-center'>Pokemon not found</p>
+      <PokemonDetailsSkeleton />
     {/if}
-  {:else}
-    <PokemonDetailsSkeleton />
-  {/if}
-</ScrollArea>
+  </ScrollArea>
+{/snippet}
+
+{@render pokemonContent()}
 
 <Dialog.Root bind:open={isOpen}>
   <Dialog.Content>
-    <ScrollArea class='h-[calc(100vh-6rem)] p-8 md:h-full'>
-      {#if !pokemonDetailsLoading}
-        {#if pokemonData}
-          <PokemonDetailsCard pokemon={pokemonData} />
-        {:else}
-          <p class='text-muted-foreground text-center'>Pokemon not found</p>
-        {/if}
-      {:else}
-        <PokemonDetailsSkeleton />
-      {/if}
-    </ScrollArea>
+    {@render pokemonContent()}
   </Dialog.Content>
 </Dialog.Root>
