@@ -3,11 +3,11 @@
   import type { LayoutData } from './$types'
   import { goto } from '$app/navigation'
   import { page } from '$app/state'
+  import InfiniteScroll from '$lib/components/InfiniteScroll.svelte'
   import { ScrollArea } from '$lib/components/ui/scroll-area/index.js'
   import { getFiltersQuery } from '$lib/data-access/getFilters'
   import { getPokemonsQuery } from '$lib/data-access/getPokemons'
   import { useDebounce } from 'runed'
-  import { onDestroy, onMount } from 'svelte'
   import Filters from './ui/Filters.svelte'
   import PokemonListCard from './ui/PokemonListCard.svelte'
 
@@ -53,38 +53,7 @@
     () => 500,
   )
 
-  let sentinel: HTMLDivElement | null = $state(null)
-  let observer: IntersectionObserver
   let scrollViewport: HTMLDivElement | null = $state(null)
-
-  async function loadMorePokemons() {
-    getPokemons.fetchNextPage()
-  }
-
-  onMount(() => {
-    if (sentinel) {
-      observer = new IntersectionObserver(
-        async ([entry]) => {
-          if (entry.isIntersecting) {
-            await loadMorePokemons()
-          }
-        },
-        {
-          root: scrollViewport,
-          rootMargin: '1px',
-          threshold: 0.1,
-        },
-      )
-
-      observer.observe(sentinel)
-    }
-  })
-
-  onDestroy(() => {
-    if (observer && sentinel) {
-      observer.unobserve(sentinel)
-    }
-  })
 </script>
 
 <div class='bg-background text-foreground grid min-h-[calc(100vh-60px)] grid-cols-1 md:grid-cols-2'>
@@ -96,20 +65,20 @@
 
       {#if !getPokemonsLoading}
         {#if pokemonList.length > 0}
-          <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-            {#each pokemonList as pokemon}
-              <PokemonListCard {pokemon} />
-            {/each}
-          </div>
+          <InfiniteScroll loadMore={() => getPokemons.fetchNextPage()} {scrollViewport}>
+            <div class='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+              {#each pokemonList as pokemon}
+                <PokemonListCard {pokemon} />
+              {/each}
+            </div>
 
-          {#if isFetchingNextPage}
-            <p class='text-muted-foreground mt-4 text-center'>Loading more Pokemons...</p>
-          {/if}
-          {#if !hasNextPage}
-            <p class='text-muted-foreground mt-4 text-center'>You’ve reached the end!</p>
-          {/if}
-
-          <div bind:this={sentinel} data-testing-id='sentinel'></div>
+            {#if isFetchingNextPage}
+              <p class='text-muted-foreground mt-4 text-center'>Loading more Pokemons...</p>
+            {/if}
+            {#if !hasNextPage}
+              <p class='text-muted-foreground mt-4 text-center'>You’ve reached the end!</p>
+            {/if}
+          </InfiniteScroll>
         {:else}
           <p class='text-muted-foreground text-center'>No Pokemons found</p>
         {/if}
