@@ -1,6 +1,6 @@
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
+import { fetchWithCache } from '$lib/utils/fetchWithCache'
 import { print } from 'graphql'
-import { fetchWithCache } from '@/lib/utils/fetchWithCache'
 
 interface ExecuteOptions {
   fetch?: typeof window.fetch

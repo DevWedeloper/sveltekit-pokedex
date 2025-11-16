@@ -1,7 +1,7 @@
-import type { FilterListQuery } from '@/gql/graphql'
+import type { FilterListQuery } from '$lib/gql/graphql'
+import { FilterListDocument } from '$lib/gql/graphql'
+import { execute } from '$lib/utils/execute'
 import { createQuery } from '@tanstack/svelte-query'
-import { execute } from '@/gql/execute'
-import { FilterListDocument } from '@/gql/graphql'
 
 interface FetchFiltersArgs {
   fetch?: typeof window.fetch

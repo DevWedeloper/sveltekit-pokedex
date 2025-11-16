@@ -1,5 +1,5 @@
 <script lang='ts'>
-  import type { FilterListQuery } from '@/gql/graphql'
+  import type { FilterListQuery } from '$lib/gql/graphql'
   import { Button } from '$lib/components/ui/button/index.js'
   import { Input } from '$lib/components/ui/input'
   import { ScrollArea } from '$lib/components/ui/scroll-area/index.js'

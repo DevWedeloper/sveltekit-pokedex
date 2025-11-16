@@ -1,8 +1,8 @@
 <script lang='ts'>
-  import type { PokemonDetails } from '@/lib/types/pokemon'
-  import { statColors } from '@/lib/constants/statColors'
-  import { statLabels } from '@/lib/constants/statLabels'
-  import { typeColors } from '@/lib/constants/typeColors'
+  import type { PokemonDetails } from '$lib/types/pokemon'
+  import { statColors } from '$lib/constants/statColors'
+  import { statLabels } from '$lib/constants/statLabels'
+  import { typeColors } from '$lib/constants/typeColors'
 
   const { pokemon }: { pokemon: PokemonDetails } = $props()
 </script>

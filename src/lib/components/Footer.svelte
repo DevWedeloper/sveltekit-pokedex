@@ -1,5 +1,5 @@
 <script>
-  import Button from '@/lib/components/ui/button/button.svelte'
+  import Button from '$lib/components/ui/button/button.svelte'
 </script>
 
 <footer class='bg-card text-muted-foreground px-6 py-4 text-sm'>

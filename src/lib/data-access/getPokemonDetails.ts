@@ -1,7 +1,7 @@
-import type { PokemonDetailsByIdQuery } from '@/gql/graphql'
+import type { PokemonDetailsByIdQuery } from '$lib/gql/graphql'
+import { PokemonDetailsByIdDocument } from '$lib/gql/graphql'
+import { execute } from '$lib/utils/execute'
 import { createQuery } from '@tanstack/svelte-query'
-import { execute } from '@/gql/execute'
-import { PokemonDetailsByIdDocument } from '@/gql/graphql'
 
 type PokemonDetails = PokemonDetailsByIdQuery['pokemon'][0]
 

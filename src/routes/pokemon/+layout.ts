@@ -1,7 +1,7 @@
 import type { LayoutLoad } from './$types'
+import { LIMIT } from '$lib/constants/paginations'
 import { fetchFilters, FILTERS_QUERY_KEY } from '$lib/data-access/getFilters'
 import { fetchPokemons, POKEMONS_QUERY_KEY } from '$lib/data-access/getPokemons'
-import { LIMIT } from '@/lib/constants/paginations'
 
 export const load: LayoutLoad = async ({ parent, fetch, url }) => {
   const filterType = url.searchParams.get('filterType')

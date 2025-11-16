@@ -1,7 +1,7 @@
 import type { Pokemon } from '$lib/types/pokemon'
+import { PokemonListByKeywordDocument, PokemonListByRegionDocument, PokemonListByTypeDocument, PokemonListDocument } from '$lib/gql/graphql'
+import { execute } from '$lib/utils/execute'
 import { createInfiniteQuery } from '@tanstack/svelte-query'
-import { execute } from '@/gql/execute'
-import { PokemonListByKeywordDocument, PokemonListByRegionDocument, PokemonListByTypeDocument, PokemonListDocument } from '@/gql/graphql'
 import { LIMIT } from '../constants/paginations'
 
 interface FetchPokemonsArgs {
