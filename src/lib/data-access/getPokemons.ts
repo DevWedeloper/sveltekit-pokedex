@@ -29,43 +29,39 @@ export async function fetchPokemons({
 }: FetchPokemonsArgs): Promise<Pokemon[]> {
   const { filterType, filterValue, search } = filter
 
-  const res = await (async () => {
-    if (search) {
-      const { pokemon } = await execute(
-        PokemonListByKeywordDocument,
-        { keyword: search, limit, offset },
-        { fetch, signal },
-      )
-      return pokemon
-    }
-
-    if (filterType === 'type' && filterValue) {
-      const { pokemon } = await execute(
-        PokemonListByTypeDocument,
-        { typeName: filterValue, limit, offset },
-        { fetch, signal },
-      )
-      return pokemon
-    }
-
-    if (filterType === 'region' && filterValue) {
-      const { pokemon } = await execute(
-        PokemonListByRegionDocument,
-        { regionName: filterValue, limit, offset },
-        { fetch, signal },
-      )
-      return pokemon
-    }
-
+  if (search) {
     const { pokemon } = await execute(
-      PokemonListDocument,
-      { limit, offset },
+      PokemonListByKeywordDocument,
+      { keyword: search, limit, offset },
       { fetch, signal },
     )
     return pokemon
-  })()
+  }
 
-  return res
+  if (filterType === 'type' && filterValue) {
+    const { pokemon } = await execute(
+      PokemonListByTypeDocument,
+      { typeName: filterValue, limit, offset },
+      { fetch, signal },
+    )
+    return pokemon
+  }
+
+  if (filterType === 'region' && filterValue) {
+    const { pokemon } = await execute(
+      PokemonListByRegionDocument,
+      { regionName: filterValue, limit, offset },
+      { fetch, signal },
+    )
+    return pokemon
+  }
+
+  const { pokemon } = await execute(
+    PokemonListDocument,
+    { limit, offset },
+    { fetch, signal },
+  )
+  return pokemon
 }
 
 export function getPokemonsQuery(filter: Filter, limit = LIMIT) {
