@@ -1,0 +1,14 @@
+query pokemonListByKeyword($keyword: String!, $limit: Int!, $offset: Int!) {
+  pokemon(limit: $limit, offset: $offset, where: { name: { _regex: $keyword } }) {
+    id
+    name
+    pokemontypes {
+      type {
+        name
+      }
+    }
+    pokemonsprites {
+      sprites(path: "other.official-artwork.front_default")
+    }
+  }
+}
