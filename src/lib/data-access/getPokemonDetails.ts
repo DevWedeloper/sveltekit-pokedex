@@ -13,7 +13,7 @@ type FetchPokemonDetailsArgs = {
 } & FetchOptions
 
 export async function fetchPokemonDetails(
-  { id, fetch = window.fetch, signal }: FetchPokemonDetailsArgs,
+  { id, fetch, signal }: FetchPokemonDetailsArgs,
 ): Promise<PokemonDetails> {
   return execute(PokemonDetailsByIdDocument, { id }, { fetch, signal })
     .then(result => result.pokemon?.[0] ?? null)

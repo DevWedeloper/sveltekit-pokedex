@@ -9,7 +9,7 @@ export function FILTERS_QUERY_KEY() {
 }
 
 export async function fetchFilters(
-  { fetch = window.fetch, signal }: FetchOptions,
+  { fetch, signal }: FetchOptions,
 ): Promise<FilterListQuery> {
   return execute(FilterListDocument, { fetch, signal })
 }
