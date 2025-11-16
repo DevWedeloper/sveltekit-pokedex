@@ -13,7 +13,8 @@
   >
     <img
       src={pokemon.pokemonsprites[0].sprites.other.dream_world?.front_default
-        ?? pokemon.pokemonsprites[0].sprites.front_default}
+        ?? pokemon.pokemonsprites[0].sprites.front_default
+        ?? '/pokeball-silhouette.svg'}
       alt={pokemon.name}
       class='h-40'
       loading='lazy'
@@ -44,7 +45,7 @@
       {#if pokemon.pokemonspecy?.pokemonspeciesflavortexts}
         <h4 class='mt-4 font-semibold'>Pokedex Entry</h4>
         <span class='text-muted-foreground max-w-sm text-sm'>
-          {pokemon.pokemonspecy?.pokemonspeciesflavortexts[0].flavor_text}
+          {pokemon.pokemonspecy?.pokemonspeciesflavortexts?.[0]?.flavor_text ?? 'No description available.'}
         </span>
       {/if}
 
