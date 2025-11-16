@@ -50,12 +50,12 @@ export async function fetchPokemons({
     }
 
     if (filterType === 'region' && filterValue) {
-      const { generation } = await execute(
+      const { pokemon } = await execute(
         PokemonListByRegionDocument,
         { regionName: filterValue, limit, offset },
         { fetch, signal },
       )
-      return generation[0].pokemonspecies.flatMap(({ pokemons }) => pokemons)
+      return pokemon
     }
 
     const { pokemon } = await execute(
