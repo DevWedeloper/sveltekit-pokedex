@@ -20,16 +20,16 @@
 <div class='flex flex-col gap-2'>
   <a
     href={pokemonUrl}
-    class='group text-card-foreground @container-[size] relative aspect-square w-full overflow-hidden rounded-xl'
+    class='group @container-[size] relative aspect-square w-full overflow-hidden rounded-xl'
   >
     {#each pokemon.pokemontypes as type, index}
       <div
-        class={cn('absolute size-[80cqw] rounded-full blur-[50cqw] filter', circlePositions[index])}
+        class={cn('absolute size-[80cqw] rounded-full blur-[50cqw]', circlePositions[index])}
         style={`background: ${typeColors[type.type?.name ?? '#A8A8A8']};`}
       ></div>
     {/each}
 
-    <div class='relative flex h-full flex-col items-center justify-center p-2 text-center'>
+    <div class='flex h-full items-center justify-center'>
       <img
         src={pokemon.pokemonsprites[0]?.sprites || '/pokeball-silhouette.svg'}
         alt={pokemon.name}
