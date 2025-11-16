@@ -13,8 +13,6 @@
   }
 
   let { filters, updateFilter, resetFilters, search = $bindable(), oninput }: Props = $props()
-
-  const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 </script>
 
 {#snippet filterGroup(title: string, items: { name: string }[], filterType: string)}
@@ -22,8 +20,8 @@
   <ScrollArea orientation='horizontal' class='w-full'>
     <div class='flex gap-2 pb-2'>
       {#each items as item}
-        <Button variant='outline' onclick={() => updateFilter(filterType, item.name)}>
-          {capitalize(item.name)}
+        <Button class='capitalize' variant='outline' onclick={() => updateFilter(filterType, item.name)}>
+          {item.name}
         </Button>
       {/each}
     </div>

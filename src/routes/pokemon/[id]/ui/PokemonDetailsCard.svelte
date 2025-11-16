@@ -52,12 +52,10 @@
       <div class='flex justify-center gap-2'>
         {#each pokemon.pokemontypes as { type }}
           <div
-            class='rounded-md px-4 py-1 text-sm font-semibold'
+            class='rounded-md px-4 py-1 text-sm font-semibold capitalize'
             style={`background-color: ${type?.name ? typeColors[type.name] : '#999'}`}
           >
-            {#if type?.name}
-              {type.name.charAt(0).toUpperCase() + type.name.slice(1)}
-            {/if}
+            {type ? type.name : 'N/A'}
           </div>
         {/each}
       </div>
