@@ -7,6 +7,13 @@
   const { pokemon }: { pokemon: PokemonDetails } = $props()
 </script>
 
+{#snippet bodyStat(label: string, value: string)}
+  <div class='flex w-full flex-col items-center gap-2'>
+    <h4 class='text-foreground font-semibold'>{label}</h4>
+    <span class='bg-card text-foreground w-full rounded-lg p-1'>{value}</span>
+  </div>
+{/snippet}
+
 {#snippet statItem(label: string, value: number, color: string)}
   <div class='flex flex-col items-center'>
     <div
@@ -63,18 +70,8 @@
       {/if}
 
       <div class='mt-4 flex w-full justify-between gap-6'>
-        <div class='flex w-full flex-col items-center gap-2'>
-          <h4 class='text-foreground font-semibold'>Height</h4>
-          <span class='bg-card text-foreground w-full rounded-lg p-1'>
-            {(pokemon.height ?? 0) / 10}m
-          </span>
-        </div>
-        <div class='flex w-full flex-col items-center gap-2'>
-          <h4 class='text-foreground font-semibold'>Weight</h4>
-          <span class='bg-card text-foreground w-full rounded-lg p-1'>
-            {(pokemon.weight ?? 0) / 10}kg
-          </span>
-        </div>
+        {@render bodyStat('Height', `${(pokemon.height ?? 0) / 10}m`)}
+        {@render bodyStat('Weight', `${(pokemon.weight ?? 0) / 10}kg`)}
       </div>
 
       <div class='mt-4 flex w-full flex-col justify-between gap-2'>
