@@ -58,3 +58,25 @@ test('mobile: closes Pokémon modal and navigates back on overlay click', async 
   // URL should be back to /pokemon
   await expect(page).toHaveURL('/pokemon')
 })
+
+test('mobile: closes Pokémon modal and preserves query params', async ({ page }) => {
+  await page.goto('/pokemon?filterType=region&filterValue=kanto')
+
+  const cards = page.locator('a.group')
+  await cards.first().waitFor({ state: 'visible' })
+
+  // Open first Pokémon (Bulbasaur) in modal
+  await cards.first().click()
+
+  const modal = page.locator('[data-slot="dialog-content"][role="dialog"]')
+  await expect(modal).toBeVisible()
+
+  // Close modal (simulate back gesture / click the close button)
+  const closeButton = page.locator('[data-dialog-close]')
+  await closeButton.click()
+
+  // Modal should no longer exist
+  await expect(modal).toHaveCount(0)
+
+  await expect(page).toHaveURL('/pokemon?filterType=region&filterValue=kanto')
+})
