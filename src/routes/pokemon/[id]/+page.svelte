@@ -1,6 +1,7 @@
 <script lang='ts'>
   import type { PageData } from './$types'
   import { goto } from '$app/navigation'
+  import { page } from '$app/state'
   import * as Dialog from '$lib/components/ui/dialog/index.js'
   import { ScrollArea } from '$lib/components/ui/scroll-area/index.js'
   import { getPokemonDetailsQuery } from '$lib/data-access/getPokemonDetails'
@@ -13,12 +14,15 @@
   const pokemonDetailsLoading = $derived(pokemonDetails.isFetching)
   const pokemonData = $derived(pokemonDetails.data)
 
+  const currentQuery = $derived(page.url.search)
+  const pokemonUrl = $derived(`/pokemon/${currentQuery}`)
+
   let innerWidth = $state(typeof window !== 'undefined' ? window.innerWidth : 0)
   let isOpen = $derived(innerWidth < 768)
 
   $effect(() => {
     if (!isOpen && innerWidth < 768) {
-      goto('/pokemon')
+      goto(pokemonUrl)
     }
   })
 </script>
