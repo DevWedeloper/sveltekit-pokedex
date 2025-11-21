@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <div class='mt-4 flex gap-4'>
+      <div class='mt-4 flex flex-wrap justify-center gap-4'>
         {#each pokemon.pokemonstats as stat}
           {@render statItem(
             stat.stat?.name ? statLabels[stat.stat.name] : 'N/A',
